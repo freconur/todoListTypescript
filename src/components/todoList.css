@@ -1,0 +1,10 @@
+.check {
+    color: red;
+    font-size: 1.5rem;
+}   
+.check_completed {
+    color: green;
+}
+.description_completed {
+    text-decoration:line-through
+}
