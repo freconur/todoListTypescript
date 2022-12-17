@@ -1,4 +1,5 @@
 import { TodoCounter } from "../components/TodoCounter"
+import TodoForm from "../components/TodoForm"
 import { TodoList } from "../components/TodoList"
 import { TodoSearch } from "../components/TodoSearch"
 import './app.css'
@@ -9,6 +10,7 @@ const AppUI = () => {
             <TodoCounter/>
             <TodoSearch/>
             <TodoList />
+            <TodoForm />
         </div>
     )
 }

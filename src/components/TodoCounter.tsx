@@ -4,6 +4,9 @@ import { TodoContext } from "../context"
 
 
 const TodoCounter = () => {
+
+   
+
     const {todoCompleted,totalTodo} = useContext(TodoContext)
     return (
         <div>
