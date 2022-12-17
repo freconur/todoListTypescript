@@ -19,6 +19,11 @@ type todoContextProvider = {
     todoCompleted: number,
     CompleteTodo: (description:string) => void,
     DeleteTodo: (description:string) => void,
+    formData: Todo,
+    setformData: (formValue: Todo) => void,
+    addTodo: (formValue: Todo) => void,
+    isOpen: Boolean,
+    setIsOpen: (buttom:Boolean) => void
 }
 
 const TodoContext = createContext<todoContextProvider>({} as todoContextProvider)
@@ -113,18 +118,45 @@ function TodoProvider({ children }: Props) {
         SaveTodos(newTodos)
     }
     //COMPLETED TODOS Y DELETE TODOS //
+    
+    //ANIADIR NUEVO TODO======================>//
+    const addTodo = (formData: Todo) => {
+        const newTodos:Todo[] = [...searchedTodos];
+        newTodos.push(formData);
+        SaveTodos(newTodos);
+      };    
+
+
+    //ANIADIR NUEVO TODO======================>//
+      console.log('searchedTodos',searchedTodos)
+    //TODOFORM ===================>//
+    const INITIAL_VALUE = 
+    {
+      id: '',
+      description: '',
+      completed: false
+    }
+    const [formData, setformData] = useState<Todo>(INITIAL_VALUE)
+    const [isOpen, setIsOpen] = useState<Boolean>(false)
+
+    //TODOFORM ===================>//
 
     return (
         <TodoContext.Provider value={{
             //cada props que pase por aqui tiene que estar tipado de lo contrario typscript me dara error cuando quiera consumir lkas props en lso componentes hijos
             todoss,
+            formData,
+            setformData,
             searchValue,
             setSearchValue,
             searchedTodos,
             todoCompleted,
             totalTodo,
             CompleteTodo,
-            DeleteTodo
+            DeleteTodo,
+            addTodo,
+            isOpen,
+            setIsOpen
         }}>
             {children}
         </TodoContext.Provider>

@@ -1,19 +1,14 @@
-import { useState } from 'react'
-import {Todo} from '../Todo'
+import { useContext } from 'react'
+import { TodoContext } from '../context'
 import './todoForm.css'
 
 
 
 const TodoForm = () => {
   // const [formData, setformData] = useState<formState['formData']>()
-  const INITIAL_VALUE = 
-    {
-      id: '',
-      description: '',
-      completed: false
-    }
   
-  const [formData, setformData] = useState<Todo>(INITIAL_VALUE)
+  const {formData, setformData, addTodo} = useContext(TodoContext)
+  
   const handleOnChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     setformData({
       ...formData,
@@ -21,15 +16,16 @@ const TodoForm = () => {
     })
 
 }
- console.log('formData',formData)
-const handleOnSumit = () => {
-
+const handleOnSumit = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault()
+  addTodo(formData)
 }
   return (
-    <form onSubmit={handleOnSumit} action="">
+    <form onSubmit={handleOnSumit} >
         Agregar nuevo Todo List
         <input onChange={handleOnChange} name="description" type="text"  placeholder="escribe un todo list" />
         <input onChange={handleOnChange} name="id" type="text"  placeholder="escribe un id" />
+        <button>agregar</button>
     </form>
     )
 }
